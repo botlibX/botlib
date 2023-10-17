@@ -2,7 +2,7 @@ NAME
 
 ::
 
-   BOTLIB - the python3 bot namespace
+   LIBBOT - the python3 bot namespace
 
 
 DESCRIPTION
@@ -10,11 +10,11 @@ DESCRIPTION
 
 ::
 
-    BOTLIB is a python3 library intended to be programmable  in a
+    LIBBOT is a python3 library intended to be programmable  in a
     static, only code, no popen, no user imports and no reading
     modules from a directory, way. 
 
-    BOTLIB provides a demo bot, it can connect to IRC, fetch and
+    LIBBOT provides a demo bot, it can connect to IRC, fetch and
     display RSS feeds, take todo notes, keep a shopping list
     and log text. You can also copy/past the service file and run
     it under systemd for 24/7 presence in a IRC channel.
@@ -41,14 +41,6 @@ INSTALL
 USAGE
 
 ::
-
-    modules are store in ~/.bot/modules
-    module examples are stored in share/libbot/modules
-
-    run skel to populate the modules directory
-
-    $ bot skl
-    $
 
     default action is doing nothing
 
