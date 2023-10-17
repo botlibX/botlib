@@ -1,0 +1,47 @@
+#!/usr/bin/env python3
+# This file is placed in the Public Domain.
+#
+# pylint: disable=C0412,C0115,C0116,W0212,R0903,C0207,C0413,W0611
+# pylint: disable=C0411,E0402,E0611,C2801
+
+
+"command"
+
+
+import getpass
+import os
+import sys
+
+
+from bot.methods import parse
+from bot.handler import Cfg, Client, command, scan
+from bot.storage import Storage
+
+
+from bot import modules
+
+
+NAME = "bot"
+Storage.workdir = os.path.expanduser(f"~/.{NAME}")
+PIDFILE = os.path.join(Storage.workdir, "{NAME}.pid")
+USER = getpass.getuser()
+
+
+class CLI(Client):
+
+    def announce(self, txt):
+        pass
+
+    def raw(self, txt):
+        print(txt)
+        sys.stdout.flush()
+
+
+parse(Cfg, " ".join(sys.argv[1:]))
+Cfg.mod = ",".join(modules.__dir__())
+cli = CLI()
+scan(modules, Cfg.mod)
+evt = cli.event(Cfg.otxt)
+parse(evt)
+command(evt)
+evt.wait()
