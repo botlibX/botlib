@@ -2,7 +2,7 @@ NAME
 
 ::
 
-   LIBBOT - library to program bots
+   BOTLIB - the python3 bot namespace
 
 
 DESCRIPTION
@@ -10,11 +10,11 @@ DESCRIPTION
 
 ::
 
-    LIBBOT is a python3 library intended to be programmable  in a
+    BOTLIB is a python3 library intended to be programmable  in a
     static, only code, no popen, no user imports and no reading
     modules from a directory, way. 
 
-    LIBBOT provides a demo bot, it can connect to IRC, fetch and
+    BOTLIB provides a demo bot, it can connect to IRC, fetch and
     display RSS feeds, take todo notes, keep a shopping list
     and log text. You can also copy/past the service file and run
     it under systemd for 24/7 presence in a IRC channel.
@@ -135,7 +135,7 @@ SYSTEMD
 
 
     [Unit]
-    Description=library to program bots
+    Description=the python3 bot namespace
     Requires=network.target
     After=network.target
 
