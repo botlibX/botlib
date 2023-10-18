@@ -11,8 +11,7 @@ import io
 import traceback
 
 
-from .censors import Censor, debug
-from .configs import Cfg
+from .censors import output
 from .objects import Object
 
 

@@ -13,9 +13,9 @@ import threading
 import time
 
 
-from bot.handler import Broker
-from bot.objects import Object
-from bot.threads import launch
+from ..handler import Broker
+from ..objects import Object
+from ..threads import launch
 
 
 def init():

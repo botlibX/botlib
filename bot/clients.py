@@ -26,5 +26,3 @@ class Client(Handler):
 
     def raw(self, txt):
         pass
-
-

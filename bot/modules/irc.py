@@ -19,13 +19,13 @@ import time
 import _thread
 
 
-from bot.defines import Broker, Censor, Cfg, Client, Errors, Event, Object
-from bot.defines import Default
-from bot.defines import command, debug, edit, fmt, keys, parse
-from bot.defines import find, fntime, launch, last, laps, sync
+from ..defines import Broker, Censor, Cfg, Client, Errors, Event, Object
+from ..defines import Default
+from ..defines import command, debug, edit, fmt, keys, parse
+from ..defines import find, fntime, launch, last, laps, sync
 
 
-NAME = Cfg.name or sys.argv[0].split(os.sep)[-1]
+NAME = Cfg.name or sys.argv[0].rsplit(os.sep, maxsplit=1)[-1]
 
 
 Censor.words = ["PING", "PONG", "PRIVMSG"]
