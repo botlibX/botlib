@@ -23,15 +23,9 @@ import _thread
 WORKDIR = os.path.expanduser("~")
 
 
-from bot.brokers import Broker
-from bot.configs import Cfg
-from bot.errored import output
-from bot.handler import Client, Handler, command, scan
-from bot.methods import parse
-from bot.objects import Default, Object, keys
-from bot.storage import Storage
-from bot.threads import launch
-from bot.utility import laps, mods, spl
+from bot.defines import Broker, Cfg, Client, Default, Handler, Object, Storage
+from bot.defines import keys, laps, launch, mods, output, parse, spl, scan
+from bot.defines import command
 
 
 from bot import errored, handler, modules
