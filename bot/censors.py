@@ -19,7 +19,7 @@ def __dir__():
             'cprint',
             'debug',
             'output'
-           ) 
+           )
 
 
 output = None

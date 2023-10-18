@@ -13,7 +13,7 @@ from .timings import Timer
 def __dir__():
     return (
             'Repeater',
-           ) 
+           )
 
 
 class Repeater(Timer):

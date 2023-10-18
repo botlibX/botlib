@@ -11,9 +11,9 @@ from .handler import Handler, command
 
 
 def __dir__():
-     return (
-             'Client',
-            ) 
+    return (
+            'Client',
+           )
 
 
 class Client(Handler):

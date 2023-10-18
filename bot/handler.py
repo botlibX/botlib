@@ -25,7 +25,7 @@ def __dir__():
             'Handler',
             'command',
             'scan'
-           ) 
+           )
 
 
 class Handler(Object):
