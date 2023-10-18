@@ -83,6 +83,8 @@ CONFIGURATION
     $ bot cfg channel=<channel>
     $ bot cfg nick=<nick>
 
+    default channel is #botd on localhost
+
     sasl
 
     $ bot pwd <nsvnick> <nspass>
