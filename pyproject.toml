@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "libbot"
 description = "library to program bots"
-version = "20"
+version = "21"
 authors = [
     {name = "botlib", email = "botlib@proton.me" },
 ]
