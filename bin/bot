@@ -29,9 +29,7 @@ from bot.defines import command, debug, output, parse, scan
 from bot.defines import daemon, launch, mods, privileges, spl
 
 
-from bot import errored
-from bot import handler
-
+import bot.errored
 import bot.modules as modules
 
 
@@ -50,7 +48,7 @@ def cprint(txt):
     sys.stdout.flush()
 
 
-errored.output = cprint
+bot.errored.output = cprint
 
 
 class CLI(Client):

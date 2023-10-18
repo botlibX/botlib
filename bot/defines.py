@@ -26,7 +26,6 @@ from .utility import *
 
 def __dir__():
     return (
-            'BroadCast',
             'Broker',
             'Cfg',
             'Client',
@@ -44,7 +43,6 @@ def __dir__():
             'cdir',
             'command',
             'construct',
-            'cprint',
             'dump',
             'dumps',
             'edit',
@@ -67,7 +65,6 @@ def __dir__():
             'lock',
             'methods',
             'mods',
-            'modules',
             'name',
             'objects',
             'output',
@@ -80,7 +77,6 @@ def __dir__():
             'storage',
             'strip',
             'sync',
-            'thr',
             'threads',
             'update',
             'utility',
