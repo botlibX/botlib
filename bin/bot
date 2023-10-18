@@ -31,7 +31,8 @@ from bot.defines import daemon, launch, mods, privileges, spl
 
 from bot import errored
 from bot import handler
-from bot import modules
+
+import bot.modules as modules
 
 
 NAME = __file__.split(os.sep)[-1].lower()

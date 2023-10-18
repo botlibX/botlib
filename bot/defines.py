@@ -7,7 +7,7 @@
 
 
 from . import brokers, censors, clients, handler, message, methods, objects
-from . import storage, threads, utility
+from . import repeats, storage, threads, timings, utility
 
 
 from .brokers import *
@@ -17,8 +17,10 @@ from .handler import *
 from .message import *
 from .methods import *
 from .objects import *
+from .repeats import *
 from .storage import *
 from .threads import *
+from .timings import *
 from .utility import *
 
 
@@ -40,7 +42,6 @@ def __dir__():
             'Thread',
             'Timer',
             'cdir',
-            'cmd',
             'command',
             'construct',
             'cprint',
@@ -56,7 +57,6 @@ def __dir__():
             'handler',
             'hook',
             'ident',
-            'irc',
             'items',
             'keys',
             'laps',
@@ -65,10 +65,7 @@ def __dir__():
             'load',
             'loads',
             'lock',
-            'log',
-            'man',
             'methods',
-            'mod',
             'mods',
             'modules',
             'name',
@@ -82,9 +79,7 @@ def __dir__():
             'spl',
             'storage',
             'strip',
-            'sts',
             'sync',
-            'tdo',
             'thr',
             'threads',
             'update',
