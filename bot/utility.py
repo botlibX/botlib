@@ -12,6 +12,18 @@ import pwd
 import sys
 
 
+def __dir__():
+    return (
+            'cdir',
+            'daemon',
+            'laps',
+            'mods',
+            'privileges',
+            'spl',
+            'strip'
+           )
+
+
 def cdir(pth) -> None:
     pth = pathlib.Path(pth)
     os.makedirs(pth, exist_ok=True)

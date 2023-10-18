@@ -13,7 +13,13 @@ from .brokers import Broker
 from .default import Default
 
 
-class Event(Default):
+def __dir__():
+     return (
+             'Message',
+            ) 
+
+
+class Message(Default):
 
     __slots__ = ('_ready', "_thr")
 

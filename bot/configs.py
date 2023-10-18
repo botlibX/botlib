@@ -9,6 +9,13 @@
 from .default import Default
 
 
+def __dir__():
+    return (
+            'Config',
+            'Cfg'
+           )
+
+
 class Config(Default):
 
     pass

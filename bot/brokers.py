@@ -9,6 +9,12 @@
 from .objects import Object
 
 
+def __dir__():
+    return (
+            'Broker',
+           )
+
+
 class Broker(Object):
 
     objs = []

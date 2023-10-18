@@ -14,6 +14,12 @@ from .objects import Object
 from .threads import launch
 
 
+def __dir__():
+    return (
+            'Timer',
+           ) 
+
+
 class Timer(Object):
 
     def __init__(self, sleep, func, *args, thrname=None):

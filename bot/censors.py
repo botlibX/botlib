@@ -13,6 +13,15 @@ from .configs import Cfg
 from .objects import Object
 
 
+def __dir__():
+    return (
+            'Censor',
+            'cprint',
+            'debug',
+            'output'
+           ) 
+
+
 output = None
 
 

@@ -24,7 +24,7 @@ import traceback
 sys.path.insert(0, os.getcwd())
 
 
-from bot.defines import Broker, Cfg, Client, Errors, Event, Handler, Storage
+from bot.defines import Broker, Cfg, Client, Errors, Handler, Message, Storage
 from bot.defines import command, cprint, debug, parse, scan
 from bot.defines import daemon, launch, mods, name, privileges, shutdown, spl
 
@@ -67,7 +67,7 @@ class Console(CLI):
         command(evt)
         evt.wait()
 
-    def poll(self) -> Event:
+    def poll(self) -> Message:
         return self.event(input("> "))
 
 

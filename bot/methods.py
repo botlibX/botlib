@@ -14,6 +14,17 @@ import uuid
 from .objects import items, keys
 
 
+def __dir__():
+    return (
+            'edit',
+            'fmt',
+            'fqn',
+            'ident',
+            'parse',
+            'search'
+           )
+
+
 def edit(obj, setter, skip=False):
     for key, val in items(setter):
         if skip and val == "":

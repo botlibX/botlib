@@ -18,8 +18,6 @@ from .errored import Errors
 def __dir__():
     return (
             'Thread',
-            'Repeater',
-            'Timer',
             'launch',
             'name'
            )

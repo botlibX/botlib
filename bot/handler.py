@@ -13,11 +13,19 @@ import _thread
 
 
 from .errored import Errors
-from .message import Event
+from .message import Message
 from .objects import Object
 from .storage import Storage
 from .threads import launch
 from .utility import spl
+
+
+def __dir__():
+    return (
+            'Handler',
+            'command',
+            'scan'
+           ) 
 
 
 class Handler(Object):
@@ -36,7 +44,7 @@ class Handler(Object):
         Handler.cmds[func.__name__] = func
 
     def event(self, txt):
-        evt = Event()
+        evt = Message()
         evt.txt = txt
         evt.orig = object.__repr__(self)
         return evt
@@ -49,12 +57,7 @@ class Handler(Object):
         if not func:
             evt.ready()
             return
-        try:
-            evt._thr = launch(func, evt)
-        except Exception as ex:
-            exc = ex.with_traceback(ex.__traceback__)
-            Errors.errors.append(exc)
-            evt.ready()
+        evt._thr = launch(func, evt)
 
     def loop(self) -> None:
         while not self.stopped.is_set():
@@ -63,7 +66,7 @@ class Handler(Object):
             except (KeyboardInterrupt, EOFError):
                 _thread.interrupt_main()
 
-    def poll(self) -> Event:
+    def poll(self) -> Message:
         return self.queue.get()
 
     def put(self, evt):

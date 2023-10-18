@@ -19,7 +19,7 @@ import time
 import _thread
 
 
-from ..defines import Broker, Censor, Cfg, Client, Errors, Event, Object
+from ..defines import Broker, Censor, Cfg, Client, Errors, Message, Object
 from ..defines import Default
 from ..defines import command, debug, edit, fmt, keys, parse
 from ..defines import find, fntime, launch, last, laps, sync
@@ -332,7 +332,7 @@ class IRC(Client, Output):
         rawstr = rawstr.replace('\u0001', '')
         rawstr = rawstr.replace('\001', '')
         debug(txt)
-        obj = Event()
+        obj = Message()
         obj.args = []
         obj.rawstr = rawstr
         obj.command = ''

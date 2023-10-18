@@ -10,6 +10,12 @@ from .brokers import Broker
 from .handler import Handler, command
 
 
+def __dir__():
+     return (
+             'Client',
+            ) 
+
+
 class Client(Handler):
 
     def __init__(self):

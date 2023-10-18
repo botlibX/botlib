@@ -14,6 +14,13 @@ from .censors import output
 from .objects import Object
 
 
+def __dir__():
+    return (
+            'Errors',
+            'shutdown'
+            )
+
+
 def shutdown():
     Errors.show()
 
