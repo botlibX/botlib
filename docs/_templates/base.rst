@@ -23,6 +23,6 @@
     :private-members:
     :undoc-members:
 
-.. raw:: html
-
-    <br><br>
+     .. raw:: html
+  
+         <br>

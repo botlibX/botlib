@@ -13,41 +13,13 @@ import threading
 import _thread
 
 
-from .brokers import Broker, BroadCast
+from .brokers import Broker
 from .errored import Errors
+from .message import Event
 from .objects import Default, Object
 from .storage import Storage
 from .threads import launch
 from .utility import spl
-
-
-class Event(Default):
-
-    __slots__ = ('_ready', "_thr")
-
-    def __init__(self, *args, **kwargs):
-        Default.__init__(self, *args, **kwargs)
-        self._ready = threading.Event()
-        self.channel = ""
-        self.orig = ""
-        self.result = []
-        self.txt = ""
-        self.type = "command"
-
-    def ready(self):
-        self._ready.set()
-
-    def reply(self, txt) -> None:
-        self.result.append(txt)
-
-    def show(self) -> None:
-        for txt in self.result:
-            BroadCast.say(self.orig, self.channel, txt)
-
-    def wait(self):
-        self._ready.wait()
-        if self._thr:
-            self._thr.join()
 
 
 class Handler(Object):
@@ -117,23 +89,6 @@ class Handler(Object):
         self.stopped.set()
 
 
-class Client(Handler):
-
-    def __init__(self):
-        Handler.__init__(self)
-        self.register("command", command)
-        Broker.add(self)
-
-    def announce(self, txt):
-        self.raw(txt)
-
-    def dosay(self, channel, txt):
-        self.raw(txt)
-
-    def raw(self, txt):
-        pass
-
-
 def command(evt):
     func = Handler.cmds.get(evt.cmd, None)
     if not func:
@@ -156,35 +111,6 @@ def scan(pkg, modnames="", initer=False, dowait=False) -> []:
     threads = []
     for modname in spl(modnames):
         module = getattr(pkg, modname, None)
-        if not module:
-            continue
-        scanned.append(modname)
-        Handler.scan(module)
-        Storage.scan(module)
-        if initer:
-            try:
-                module.init
-            except AttributeError:
-                continue
-            inited.append(modname)
-            threads.append(launch(module.init, name=f"init {modname}"))
-    if dowait:
-        for thread in threads:
-            thread.join()
-    return inited
-
-
-def scandir(path, modnames="", initer=False, dowait=False) -> []:
-    if not os.path.exists(path):
-        return []
-    inited  = []
-    scanned = []
-    threads = []
-    fnames  = os.listdir(path)
-    for modname in spl(modnames):
-        if modname not in fnames:
-            continue
-        module = importlib.import_module(f"modules.{modname}")
         if not module:
             continue
         scanned.append(modname)

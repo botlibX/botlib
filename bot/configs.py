@@ -9,4 +9,9 @@
 from .objects import Default
 
 
-Cfg = Default()
+class Config(Default):
+
+    pass
+
+
+Cfg = Config()

@@ -18,6 +18,12 @@
 
 .. automodule:: {{ fullname }}
     :members:
+    :private-members:
+    :undoc-members:
+
+    .. raw:: html
+  
+        <br>
 
     {% block exceptions %}
     {% if exceptions %}
@@ -37,6 +43,10 @@
     .. autosummary:: 
     {% for item in classes %}
         {{ item }}
+        .. raw:: html
+
+            <br><br>
+
     {%- endfor %}
     {% endif %}
     {% endblock %}
@@ -54,6 +64,8 @@
 
     .. raw:: html
 
-       <br><br>
+        <br><br>
 
 .. currentmodule:: {{ fullname }}
+
+

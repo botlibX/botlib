@@ -24,14 +24,9 @@ import traceback
 sys.path.insert(0, os.getcwd())
 
 
-from bot.brokers import Broker
-from bot.configs import Cfg
-from bot.errored import Errors, debug, output
-from bot.methods import parse
-from bot.handler import Client, Event, Handler, command, scan
-from bot.storage import Storage
-from bot.threads import launch
-from bot.utility import daemon, mods, privileges, spl
+from bot.defines import Broker, Cfg, Client, Errors, Event, Handler, Storage
+from bot.defines import command, debug, output, parse, scan
+from bot.defines import daemon, launch, mods, privileges, spl
 
 
 from bot import errored
@@ -82,37 +77,6 @@ def ver(event):
     event.reply(f"{NAME.upper()} {VERSION}")
 
 
-def scan(path, modnames="", initer=False, dowait=False) -> []:
-    if not os.path.exists(path):
-        return []
-    inited  = []
-    scanned = []
-    threads = []
-    fnames  = [x[:-3] for x  in os.listdir(path) if (x.endswith('py') and not x.startswith("__"))]
-    sys.path.insert(0, os.path.dirname(path))
-    pname = path.split(os.sep)[-1]
-    for mname in fnames:
-        if mname not in modnames:
-            continue
-        module = importlib.import_module(f"{pname}.{mname}")
-        if not module:
-            continue
-        scanned.append(mname)
-        Handler.scan(module)
-        Storage.scan(module)
-        if initer:
-            try:
-                module.init
-            except AttributeError:
-                continue
-            inited.append(mname)
-            threads.append(launch(module.init, name=f"init {mname}"))
-    if dowait:
-        for thread in threads:
-            thread.join()
-    return fnames
-
-
 def wrap(func) -> None:
     old = None
     try:
@@ -131,27 +95,20 @@ def wrap(func) -> None:
 
 
 def main():
-    mods = modules.__path__[0]
     parse(Cfg, " ".join(sys.argv[1:]))
-    
-    Cfg.mod = ",".join(
-                       [
-                        x[:-3] for x in os.listdir(Storage.mods())
-                        if not x.startswith("__")
-                       ]
-                      )
+    Cfg.mod = ",".join(modules.__dir__())
     if "d" in Cfg.opts:
         daemon()
     if "d" in Cfg.opts or "s" in Cfg.opts:
         privileges(getpass.getuser())
         debug(f"dropped to {USER} privileges")
-        scan(mods, Cfg.mod, True)
+        scan(modules, Cfg.mod, True)
         while 1:
             time.sleep(1.0)
     elif "c" in Cfg.opts:
         dtime = time.ctime(time.time()).replace("  ", " ")
         debug(f"{NAME.upper()} started at {dtime} {Cfg.opts.upper()} {Cfg.mod.upper()}")
-        scan(mods, Cfg.mod, True, True)
+        scan(modules, Cfg.mod, True, True)
         csl = Console()
         csl.add(ver)
         csl.start()
@@ -159,16 +116,12 @@ def main():
     else:
         cli = CLI()
         cli.add(ver)
-        scan(Storage.mods(), Cfg.mod)
+        scan(modules, Cfg.mod)
         evt = cli.event(Cfg.otxt)
         parse(evt)
         command(evt)
         evt.wait()
 
 
-def wrapped():
-    wrap(main)
-
-
 if __name__ == "__main__":
-    wrapped()
+    wrap(main)

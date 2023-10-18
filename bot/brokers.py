@@ -19,6 +19,11 @@ class Broker(Object):
         Broker.objs.append(obj)
 
     @staticmethod
+    def announce(txt):
+        for obj in Broker.objs:
+            obj.announce(txt)
+
+    @staticmethod
     def byorig(orig):
         for obj in Broker.objs:
             if object.__repr__(obj) == orig:
@@ -31,14 +36,6 @@ class Broker(Object):
             Broker.objs.remove(obj)
         except ValueError:
             pass
-
-
-class BroadCast(Object):
-
-    @staticmethod
-    def announce(txt):
-        for obj in Broker.objs:
-            obj.announce(txt)
 
     @staticmethod
     def say(orig, channel, txt):

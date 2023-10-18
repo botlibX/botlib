@@ -11,23 +11,9 @@ import io
 import traceback
 
 
+from .censors import Censor, debug
 from .configs import Cfg
 from .objects import Object
-
-
-output = None
-
-
-class Censor(Object):
-
-    words = []
-
-    @staticmethod
-    def skip(txt) -> bool:
-        for skp in Censor.words:
-            if skp in str(txt):
-                return True
-        return False
 
 
 class Errors(Object):
@@ -57,12 +43,3 @@ class Errors(Object):
     def show():
         for exc in Errors.errors:
             Errors.handle(exc)
-
-
-def debug(txt):
-    if output is None:
-        return
-    if Censor.skip(txt):
-        return
-    if "v" in Cfg.opts:
-        output(txt)
