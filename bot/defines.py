@@ -13,6 +13,7 @@ from . import repeats, storage, threads, timings, utility
 from .brokers import *
 from .censors import *
 from .clients import *
+from .errored import *
 from .handler import *
 from .message import *
 from .methods import *
@@ -70,6 +71,7 @@ def __dir__():
             'rss',
             'scan',
             'search', 
+            'shutdown',
             'spl',
             'strip',
             'sync',

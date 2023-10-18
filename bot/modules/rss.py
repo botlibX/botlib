@@ -19,7 +19,8 @@ from urllib.parse import quote_plus, urlencode
 
 
 from ..defines import Broker, Default, Object, Repeater
-from ..defines import find, fmt, fntime, laps, last, launch, sync, update
+from ..defines import debug, find, fmt, fntime, laps, last, launch
+from ..defines import sync, update
 
 
 DEBUG = False

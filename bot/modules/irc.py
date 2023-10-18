@@ -543,7 +543,6 @@ def cb_ready(evt):
     bot = byorig(evt.orig)
     if bot:
         bot.events.ready.set()
-    debug(f"ready {evt.orig[1:].split()[0]}")
 
 
 def cb_001(evt):

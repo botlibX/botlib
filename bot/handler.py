@@ -101,7 +101,7 @@ def command(evt):
     evt.ready()
 
 
-def scan(pkg, modnames="", initer=False, dowait=False) -> []:
+def scan(pkg, modnames="", initer=False) -> []:
     if not pkg:
         return []
     inited = []
@@ -121,7 +121,4 @@ def scan(pkg, modnames="", initer=False, dowait=False) -> []:
                 continue
             inited.append(modname)
             threads.append(launch(module.init, name=f"init {modname}"))
-    if dowait:
-        for thread in threads:
-            thread.join()
-    return inited
+    return threads

@@ -25,8 +25,8 @@ sys.path.insert(0, os.getcwd())
 
 
 from bot.defines import Broker, Cfg, Client, Errors, Event, Handler, Storage
-from bot.defines import command, cprint, debug, output, parse, scan
-from bot.defines import daemon, launch, mods, privileges, spl
+from bot.defines import command, cprint, debug, parse, scan
+from bot.defines import daemon, launch, mods, name, privileges, shutdown, spl
 
 
 import bot.censors
@@ -34,7 +34,11 @@ import bot.modules as modules
 
 
 NAME = __file__.split(os.sep)[-1].lower()
+
+
 Storage.workdir = os.path.expanduser(f"~/.{NAME}")
+
+
 PIDFILE = os.path.join(Storage.workdir, "{NAME}.pid")
 USER = getpass.getuser()
 VERSION = 20
@@ -44,7 +48,7 @@ Cfg.name = NAME
 
 
 bot.censors.output = print
-#output = print
+
 
 class CLI(Client):
 
@@ -85,7 +89,6 @@ def wrap(func) -> None:
     finally:
         if old:
             termios.tcsetattr(sys.stdin.fileno(), termios.TCSADRAIN, old)
-    Errors.show()
 
 
 def main():
@@ -101,8 +104,13 @@ def main():
             time.sleep(1.0)
     elif "c" in Cfg.opts:
         dtime = time.ctime(time.time()).replace("  ", " ")
-        cprint(f"{NAME.upper()} started at {dtime} {Cfg.opts.upper()} {Cfg.mod.upper()}")
-        scan(modules, Cfg.mod, "x" not in Cfg.opts, True)
+        if "v" in Cfg.opts:
+            cprint(f"{NAME.upper()} started at {dtime} {Cfg.opts.upper()} {Cfg.mod.upper()}")
+        thrs = scan(modules, Cfg.mod, "x" not in Cfg.opts)
+        if "w" in Cfg.opts:
+            for thr in thrs:
+                thr.join()
+                cprint(f"ready {thr.name}")
         csl = Console()
         csl.add(ver)
         csl.start()
@@ -119,3 +127,4 @@ def main():
 
 if __name__ == "__main__":
     wrap(main)
+    shutdown()

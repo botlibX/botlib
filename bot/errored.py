@@ -14,6 +14,10 @@ from .censors import output
 from .objects import Object
 
 
+def shutdown():
+    Errors.show()
+
+
 class Errors(Object):
 
     errors = []
@@ -41,3 +45,4 @@ class Errors(Object):
     def show():
         for exc in Errors.errors:
             Errors.handle(exc)
+    
