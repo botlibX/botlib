@@ -83,7 +83,7 @@ CONFIGURATION
     $ bot cfg channel=<channel>
     $ bot cfg nick=<nick>
 
-    default channel is #botd on localhost
+    default channel is #bot on localhost
 
     sasl
 
@@ -143,6 +143,9 @@ SYSTEMD
 
     [Install]
     WantedBy=multi-user.target
+
+
+    default channel is #botd on localhost.
 
 
 FILES

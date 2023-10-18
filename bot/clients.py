@@ -3,7 +3,7 @@
 # pylint: disable=C0115,C0116,E0402,W0613
 
 
-"clientele"
+"clients"
 
 
 from .brokers import Broker

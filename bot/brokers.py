@@ -38,7 +38,6 @@ class Broker(Object):
 
     @staticmethod
     def say(orig, channel, txt) -> None:
-        "say on specific object"
         bot = Broker.byorig(orig)
         if not bot:
             return
