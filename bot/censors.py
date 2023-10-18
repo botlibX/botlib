@@ -1,10 +1,12 @@
 # This file is placed in the Public Domain.
 #
-# pylint: disable=E0402,C0115,C0116,W0718,W0702,W0212,C0411,W0613,R0903,E1102
-# pylint: disable=C0103,W0125,W0126
+# pylint: disable=C0115,C0116,C0103,E0402,E1102,R0903
 
 
 "at the gate"
+
+
+import sys
 
 
 from .configs import Cfg
@@ -26,10 +28,15 @@ class Censor(Object):
         return False
 
 
-def debug(txt):
+def cprint(txt):
     if output is None:
         return
     if Censor.skip(txt):
         return
+    output(txt)
+    sys.stdout.flush()
+
+
+def debug(txt):
     if "v" in Cfg.opts:
-        output(txt)
+        cprint(txt)

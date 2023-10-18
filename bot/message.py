@@ -1,7 +1,6 @@
 # This file is placed in the Public Domain.
 #
-# pylint: disable=E0402,C0115,C0116,W0718,W0702,W0212,C0411,W0613,R0903,E1102
-# pylint: disable=C0103,W0125,W0126
+# pylint: disable=C0115,C0116,E0402
 
 
 "messages"
@@ -18,16 +17,17 @@ class Event(Default):
 
     __slots__ = ('_ready', "_thr")
 
-    def __init__(self, *args, **kwargs):
-        Default.__init__(self, *args, **kwargs)
-        self._ready = threading.Event()
+    def __init__(self):
+        Default.__init__(self)
+        self._ready  = threading.Event()
+        self._thr    = None
         self.channel = ""
-        self.orig = ""
-        self.result = []
-        self.txt = ""
-        self.type = "command"
+        self.orig    = ""
+        self.result  = []
+        self.txt     = ""
+        self.type    = "command"
 
-    def ready(self):
+    def ready(self) -> None:
         self._ready.set()
 
     def reply(self, txt) -> None:
@@ -37,7 +37,7 @@ class Event(Default):
         for txt in self.result:
             Broker.say(self.orig, self.channel, txt)
 
-    def wait(self):
+    def wait(self) -> None:
         self._ready.wait()
         if self._thr:
             self._thr.join()

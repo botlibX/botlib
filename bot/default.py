@@ -11,8 +11,6 @@ from .objects import Object
 
 class Default(Object):
 
-    "default attributes"
-
     __slots__ = ("__default__",)
 
     def __init__(self):
